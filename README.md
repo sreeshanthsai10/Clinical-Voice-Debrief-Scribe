@@ -1,6 +1,3 @@
-Here is the complete, raw markdown file content. You can copy and paste this directly into your `README.md`:
-
-```markdown
 # Clinical Voice Debrief Scribe 🩺🎙️
 
 An AI-powered clinical documentation pipeline that transforms spoken physician debriefs into structured, EHR-ready **SOAP** (Subjective, Objective, Assessment, Plan) notes.
@@ -11,26 +8,23 @@ The system pairs edge-local speech transcription (`faster-whisper`) with clinica
 
 ## 🏗️ Architecture
 
-
-```
-
+```text
 [ Browser Audio Capture (WebM) ]
-│
-▼
-FastAPI Ingestion Endpoint (/process-voice-debrief)
-│
-├─► 1. Local Edge ASR (faster-whisper base.en, INT8)
-│        └─► Raw Spoken Transcript (Zero API cost / No latency quotas)
-│
-├─► 2. NVIDIA NIM Reasoning (meta/llama-3.2-11b-vision-instruct)
-│        └─► Clinical Entity Extraction & Normalization
-│
-├─► 3. Pydantic v2 Schema Validation
-│        └─► Strict JSON Parsing & Boundary Sanitization
-│
-▼
+               │
+               ▼
+    FastAPI Ingestion Endpoint (/process-voice-debrief)
+               │
+               ├─► 1. Local Edge ASR (faster-whisper base.en, INT8)
+               │        └─► Raw Spoken Transcript (Zero API cost / No latency quotas)
+               │
+               ├─► 2. NVIDIA NIM Reasoning (meta/llama-3.2-11b-vision-instruct)
+               │        └─► Clinical Entity Extraction & Normalization
+               │
+               ├─► 3. Pydantic v2 Schema Validation
+               │        └─► Strict JSON Parsing & Boundary Sanitization
+               │
+               ▼
 [ Web UI: Formatted SOAP Card | Clipboard Copy | Print-to-PDF ]
-
 ```
 
 ---
@@ -59,9 +53,7 @@ FastAPI Ingestion Endpoint (/process-voice-debrief)
 
 ## 📂 Project Structure
 
-
-```
-
+```text
 clinical-scribe/
 ├── .env                  # API configuration (git-ignored)
 ├── .gitignore            # Environment, model cache, and audio ignore rules
@@ -69,8 +61,7 @@ clinical-scribe/
 ├── main.py               # FastAPI pipeline, Whisper model, & NIM extraction logic
 ├── README.md             # Project documentation
 └── static/
-└── index.html        # Audio recorder, SOAP viewer, clipboard & print controls
-
+    └── index.html        # Audio recorder, SOAP viewer, clipboard & print controls
 ```
 
 ---
@@ -78,35 +69,30 @@ clinical-scribe/
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository
+
 ```bash
 git clone [https://github.com/](https://github.com/)<your-username>/clinical-scribe.git
 cd clinical-scribe
-
 ```
 
 ### 2. Set Up a Virtual Environment
 
-**Windows:**
-
+**Windows (Command Prompt):**
 ```cmd
 python -m venv venv
 venv\Scripts\activate
-
 ```
 
 **macOS / Linux:**
-
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-
 ```
 
 ### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
-
 ```
 
 ### 4. Configure Environment Variables
@@ -115,7 +101,6 @@ Create a `.env` file in the root directory:
 
 ```env
 NVIDIA_API_KEY=nvapi-your_nvidia_api_key_here
-
 ```
 
 > Get a free API key at [build.nvidia.com](https://build.nvidia.com).
@@ -124,7 +109,6 @@ NVIDIA_API_KEY=nvapi-your_nvidia_api_key_here
 
 ```bash
 python main.py
-
 ```
 
 Navigate to `http://127.0.0.1:8000` in your browser.
@@ -154,7 +138,6 @@ The extraction layer produces validated JSON adhering to the following schema:
     "Avoid spicy foods"
   ]
 }
-
 ```
 
 ---
@@ -168,7 +151,3 @@ The extraction layer produces validated JSON adhering to the following schema:
 ## 📄 License
 
 Distributed under the MIT License.
-
-```
-
-```
